@@ -1,4 +1,6 @@
-package sk.stuba.fei.uim.oop.cards;
+package sk.stuba.fei.uim.oop.position;
+
+import sk.stuba.fei.uim.oop.cards.Cards;
 
 import java.util.ArrayList;
 import java.util.Collections;

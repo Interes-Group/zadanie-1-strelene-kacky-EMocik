@@ -5,11 +5,11 @@ Put the cards from the pond back into the duck deck, shuffle the deck and
 place 6 new cards into the pond.
  */
 
+import sk.stuba.fei.uim.oop.position.Pond;
+
 import java.util.Collections;
 
 public class DuckDanceCard extends Cards{
-//    public static int amount = 1;
-//    public static String name = "DuckDance";
     Pond copyOfPond;
 
 
@@ -32,6 +32,6 @@ public class DuckDanceCard extends Cards{
 
     @Override
     public String toString() {
-        return "Duck Dance Card";
+        return "Duck Dance";
     }
 }

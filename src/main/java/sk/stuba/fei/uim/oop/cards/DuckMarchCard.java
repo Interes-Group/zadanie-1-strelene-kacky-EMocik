@@ -6,9 +6,9 @@ space is moved to the bottom of the duck deck,
 the empty space at the end is filled with the duck from the top of the duck deck.
  */
 
+import sk.stuba.fei.uim.oop.position.Pond;
+
 public class DuckMarchCard extends Cards{
-//    public static int amount = 6;
-//    public static String name = "DuckMarch";
     Pond copyOfPond;
 
     public DuckMarchCard(Pond copyOfPond){
@@ -26,6 +26,6 @@ public class DuckMarchCard extends Cards{
     }
     @Override
     public String toString() {
-        return "Duck March Card";
+        return "Duck March";
     }
 }

@@ -1,4 +1,4 @@
-package sk.stuba.fei.uim.oop.cards;
+package sk.stuba.fei.uim.oop.position;
 
 import java.util.ArrayList;
 
@@ -19,9 +19,9 @@ public class Pond{
         }
     }
 
-    private ArrayList<String> pond = new ArrayList<>();
-    private ArrayList<String> remainingPond = new ArrayList<>();
-    private ArrayList<Boolean> aim = new ArrayList<>();
+    private final ArrayList<String> pond = new ArrayList<>();
+    private final ArrayList<String> remainingPond = new ArrayList<>();
+    private final ArrayList<Boolean> aim = new ArrayList<>();
 
 
 

@@ -110,10 +110,7 @@ public class DuckHunt {
 
     private void startGame(){
 
-
         System.out.println("The Duck Hunt is starting with " + getNumberOfPlayers() + " players!");
-
-        String killedDuck = "";
 
         while(getNumberOfPlayers() > 1){
             currentPlayer = roundCounter % players.length; //determine which player turn it is
@@ -123,11 +120,24 @@ public class DuckHunt {
                 this.roundManager(roundCounter);
                 this.showPlayerCards(currentPlayer);
 
-                int inputPosition = ZKlavesnice.readInt("Choose an action card <0;2>");
-                while (inputPosition > 2 || inputPosition < 0){
-                    inputPosition = ZKlavesnice.readInt("You can only choose between 0 and 2, try again");
-                }
-                this.lifeSubtractor(killedDuck, inputPosition);
+
+                
+//                for (Cards card : players[currentPlayer].getHand()){
+//                    if(Objects.equals("Shoot",card.toString())){
+//                        shootCardCount ++;
+//                    }
+//                    if(Objects.equals("Aim",card.toString())){
+//                        aimCardCount ++;
+//                    }
+//                }
+//
+//                if(shootCardCount != 3 && aimCardCount != 3){
+//                    usedCard = this.lifeSubtractor(inputPosition);
+//                }
+                
+
+
+
 
 
 
@@ -153,13 +163,48 @@ public class DuckHunt {
             if(player == null || (!player.wasRemoved() && player.isActive()) ) continue;
             System.out.println("Player " + players[currentPlayer].name() + " has lost the game of Duck Hunt, poor little ducks...");
 
+            for(byte i = 0; i < 3; i++) {
+                activeDeck.addCard(players[currentPlayer].getHand().get(i));
+                players[currentPlayer].getHand().clear();
+            }
+
             player.removePlayer();
             players[currentPlayer] = null;
         }
     }
 
-    private void lifeSubtractor(String killedDuck, int inputPosition){
-        killedDuck = players[currentPlayer].getHand().get(inputPosition).use();
+    private void cardUsage(){
+
+        boolean allAimFalse = true;
+        boolean allAimTrue = true;
+
+        for(boolean aim : pond.changeAim()){
+            if(!aim) allAimTrue = false;
+            if(aim) allAimFalse = false;
+        }
+
+
+
+
+
+
+        int inputPosition = ZKlavesnice.readInt("Choose an action card <0;2>");
+        while (inputPosition > 2 || inputPosition < 0){
+            inputPosition = ZKlavesnice.readInt("You can only choose between 0 and 2, try again");
+        }
+
+        Cards usedCard = players[currentPlayer].getHand().get(inputPosition);
+
+        if((allAimFalse && Objects.equals("Shoot",usedCard.toString())) ||
+                (allAimTrue && Objects.equals("Aim", usedCard.toString()))){
+
+            System.out.println("You cannot use" + usedCard.toString() + " at the moment, please choose another one");
+
+            this.cardUsage();
+        }
+
+        String killedDuck = usedCard.use();
+
 
         if(!Objects.equals(killedDuck,"")){
             for (Player  player : players){
@@ -170,6 +215,10 @@ public class DuckHunt {
                 }
             }
         }
+
+
+        players[currentPlayer].getHand().set(inputPosition,activeDeck.getCard());
+        activeDeck.addCard(usedCard);
     }
 
     private void showPlayerCards(int currentPlayer){
@@ -186,7 +235,7 @@ public class DuckHunt {
 
 
 
-        for (byte i = 0; i < 5; i++) {
+        for (byte i = 0; i < 6; i++) {
             System.out.println("|  " + i + ". " + cards.get(i) + "\t\t\t" + (pond.changeAim().get(i) ? "Aimed at\t\t |" : "Not aimed at\t |"));
         }
         System.out.println("┖------------------------------------┙");

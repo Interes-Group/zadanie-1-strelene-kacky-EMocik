@@ -5,11 +5,11 @@ Randomly rearrange the positions of all the cards in the pond.
 The targeted spaces do not change (perform a shuffle of the cards in the pond).
  */
 
+import sk.stuba.fei.uim.oop.position.Pond;
+
 import java.util.Collections;
 
 public class ScatterCard extends Cards{
-//    public static int amount = 2;
-//    public static String name = "Scatter";
     Pond copyOfPond;
 
     public ScatterCard(Pond copyOfPond){
@@ -25,6 +25,6 @@ public class ScatterCard extends Cards{
 
     @Override
     public String toString() {
-        return "Scatter Card";
+        return "Scatter";
     }
 }

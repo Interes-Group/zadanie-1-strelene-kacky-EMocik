@@ -5,14 +5,13 @@ Move any duck to the first space in the pond.
 The ducks that were overtaken by it move one space backwards, to fill the gap.
  */
 
+import sk.stuba.fei.uim.oop.position.Pond;
 import sk.stuba.fei.uim.oop.utility.KeyboardInput;
 
 import java.util.Collections;
 import java.util.Objects;
 
 public class TurboduckCard extends Cards {
-//    public static int amount = 1;
-//    public static String name = "Turboduck";
     Pond copyOfPond;
 
 
@@ -34,6 +33,6 @@ public class TurboduckCard extends Cards {
 
     @Override
     public String toString() {
-        return "Turboduck Card";
+        return "Turboduck";
     }
 }

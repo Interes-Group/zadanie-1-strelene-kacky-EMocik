@@ -2,11 +2,10 @@ package sk.stuba.fei.uim.oop.cards;
 
 //Aim - 10 cards
 
+import sk.stuba.fei.uim.oop.position.Pond;
 import sk.stuba.fei.uim.oop.utility.KeyboardInput;
 
 public class AimCard extends Cards{
-//      public int amount = 10;
-//    public static String name = "Aim";
     Pond copyOfPond;
 
 
@@ -33,6 +32,6 @@ public class AimCard extends Cards{
 
     @Override
     public String toString() {
-        return "Aim Card";
+        return "Aim";
     }
 }
