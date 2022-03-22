@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ActiveDeck {
-    private ArrayList<Cards> actionCards = new ArrayList<>();
+    private final ArrayList<Cards> actionCards = new ArrayList<>();
 
     public ActiveDeck(ArrayList<Cards> newActionCards){
         actionCards.addAll(newActionCards);

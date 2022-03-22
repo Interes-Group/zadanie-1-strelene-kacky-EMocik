@@ -14,9 +14,8 @@ public class DuckHunt {
     private Player[] players;
     private int roundCounter;
     private int currentPlayer;
-    private int numberPlayers;
-    private ArrayList<String> names = new ArrayList<>();
-    private ArrayList<String> cards = new ArrayList<>();
+    private final ArrayList<String> names = new ArrayList<>();
+    private final ArrayList<String> cards = new ArrayList<>();
     private final Color colors = new Color();
     private Pond pond;
     private ActiveDeck activeDeck;
@@ -36,7 +35,7 @@ public class DuckHunt {
     private void initGamePlayers(){
         System.out.println("Welcome to Duck Hunt!");
 
-        numberPlayers = KeyboardInput.readInt("Enter the number of players");
+        int numberPlayers = KeyboardInput.readInt("Enter the number of players");
         this.players = new Player[numberPlayers];
 
         while(numberPlayers < 2 || numberPlayers > 6){
@@ -115,31 +114,11 @@ public class DuckHunt {
         while(getNumberOfPlayers() > 1){
             currentPlayer = roundCounter % players.length; //determine which player turn it is
             this.playerVibeCheck();
-
             if(players[currentPlayer] != null){
                 this.roundManager(roundCounter);
                 this.showPlayerCards(currentPlayer);
 
-
-                
-//                for (Cards card : players[currentPlayer].getHand()){
-//                    if(Objects.equals("Shoot",card.toString())){
-//                        shootCardCount ++;
-//                    }
-//                    if(Objects.equals("Aim",card.toString())){
-//                        aimCardCount ++;
-//                    }
-//                }
-//
-//                if(shootCardCount != 3 && aimCardCount != 3){
-//                    usedCard = this.lifeSubtractor(inputPosition);
-//                }
-                
-
-
-
-
-
+                this.cardUsage(false);
 
 
             }
@@ -183,6 +162,9 @@ public class DuckHunt {
 
         boolean allAimFalse = true;
         boolean allAimTrue = true;
+        boolean allCardsShoot = true;
+        boolean allCardsAim = true;
+
 
         for(boolean aim : pond.changeAim()){
             if(!aim) allAimTrue = false;
@@ -190,8 +172,26 @@ public class DuckHunt {
         }
 
 
+        for (Cards card : players[currentPlayer].getHand()){
+
+            if(!Objects.equals("Shoot",card.toString())){
+                allCardsShoot = false;
+            }
+
+            if(!Objects.equals("Aim",card.toString())){
+                allCardsAim = false;
+            }
+        }
 
 
+        if((allAimFalse && allCardsShoot) || (allAimTrue && allCardsAim)){
+            System.out.println("You cannot play any card, new card has been chosen from the deck automatically. You wait one turn");
+
+            players[currentPlayer].getHand().set(0,activeDeck.getCard());
+            activeDeck.addCard(players[currentPlayer].getHand().get(1));
+
+            return true;
+        }
 
 
         int inputPosition = ZKlavesnice.readInt("Choose an action card <0;2>");
@@ -204,9 +204,10 @@ public class DuckHunt {
         if((allAimFalse && Objects.equals("Shoot",usedCard.toString())) ||
                 (allAimTrue && Objects.equals("Aim", usedCard.toString()))){
 
-            System.out.println("You cannot use" + usedCard.toString() + " at the moment, please choose another one");
+            System.out.println("You cannot use " + usedCard + " at the moment, please choose another card");
 
-            this.cardUsage();
+            if(this.cardUsage(true))
+                return true;
         }
 
         String killedDuck = usedCard.use();
@@ -225,6 +226,8 @@ public class DuckHunt {
 
         players[currentPlayer].getHand().set(inputPosition,activeDeck.getCard());
         activeDeck.addCard(usedCard);
+
+        return true;
     }
 
     private void showPlayerCards(int currentPlayer){

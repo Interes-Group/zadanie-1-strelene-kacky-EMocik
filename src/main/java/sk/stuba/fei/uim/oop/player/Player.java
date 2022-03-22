@@ -2,6 +2,7 @@ package sk.stuba.fei.uim.oop.player;
 
 import sk.stuba.fei.uim.oop.cards.Cards;
 
+import java.lang.management.GarbageCollectorMXBean;
 import java.util.ArrayList;
 
 public class Player {
@@ -31,6 +32,10 @@ public class Player {
 
     public void removePlayer(){
         removed = true;
+        hand.clear();
+        hand = null;
+        name = null;
+        color = null;
     }
 
     public boolean wasRemoved( ){
