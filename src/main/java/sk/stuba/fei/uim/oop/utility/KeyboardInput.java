@@ -41,9 +41,7 @@ public class KeyboardInput {
     public static char readChar() {
         try {
             InputStreamReader inputStreamReader = new InputStreamReader(System.in);
-            char temp = trimChar((char) inputStreamReader.read());
-            inputStreamReader.close();
-            return temp;
+            return trimChar((char) inputStreamReader.read());
         } catch (IOException e) {
             e.printStackTrace();
             return (char) 0;
@@ -77,9 +75,7 @@ public class KeyboardInput {
     public static String readString() {
         try {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-            String temp = bufferedReader.readLine().trim();
-            bufferedReader.close();
-            return temp;
+            return bufferedReader.readLine().trim();
         } catch (IOException e) {
             e.printStackTrace();
             return "";
