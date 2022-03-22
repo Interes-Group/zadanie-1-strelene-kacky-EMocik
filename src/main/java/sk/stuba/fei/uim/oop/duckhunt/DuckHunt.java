@@ -144,7 +144,7 @@ public class DuckHunt {
 
             }
             roundCounter++;
-            break;
+
         }
     }
 
@@ -173,7 +173,13 @@ public class DuckHunt {
         }
     }
 
-    private void cardUsage(){
+    /**
+     * Uses an action card and checks all necessary parameters for legal usage
+     * @param hasBeenUsed used for recursion ALWAYS SET TO FALSE
+     * @return used for recursion, unnecessary for usage beyond that
+     */
+    private boolean cardUsage(boolean hasBeenUsed){
+
 
         boolean allAimFalse = true;
         boolean allAimTrue = true;
@@ -236,7 +242,7 @@ public class DuckHunt {
 
 
         for (byte i = 0; i < 6; i++) {
-            System.out.println("|  " + i + ". " + cards.get(i) + "\t\t\t" + (pond.changeAim().get(i) ? "Aimed at\t\t |" : "Not aimed at\t |"));
+            System.out.println("|  " + i + ". " + pond.changePond().get(i) + "\t\t\t" + (pond.changeAim().get(i) ? "Aimed at\t\t |" : "Not aimed at\t |"));
         }
         System.out.println("┖------------------------------------┙");
     }
