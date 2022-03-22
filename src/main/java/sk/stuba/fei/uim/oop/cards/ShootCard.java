@@ -16,6 +16,7 @@ public class ShootCard extends Cards{
     public String use() {
 
         int position = KeyboardInput.readInt("Select an aimed position to shoot at");
+
         while(position > 6 || position <= 0) {
             position = KeyboardInput.readInt("You can only select a valid <0-5> or an aimed at position");
             //if pos isnt water, remove pos
