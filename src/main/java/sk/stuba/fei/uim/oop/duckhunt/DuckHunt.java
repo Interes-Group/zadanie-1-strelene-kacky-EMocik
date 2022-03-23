@@ -101,6 +101,9 @@ public class DuckHunt {
     }
 
     private void initPlayer() {
+
+        numOfPlayers = players.length;
+
         for(int i = 0; i < players.length; i++){
             players[i] = new Player(names.get(0),activeDeck.getHand(),colors.getColor(i));
             names.remove(0);
@@ -112,18 +115,21 @@ public class DuckHunt {
 
         System.out.println("The Duck Hunt is starting with " + getNumberOfPlayers() + " players!");
 
+
         while(getNumberOfPlayers() > 1){
-            currentPlayer = roundCounter % players.length; //determine which player turn it is
-            this.playerVibeCheck();
-            if(players[currentPlayer] != null){
+            if(currentPlayer >= numOfPlayers){
+                currentPlayer = 0;
+            }
+
+            if(players[currentPlayer].name() != null){
                 this.roundManager(roundCounter);
                 this.showPlayerCards(currentPlayer);
 
                 this.cardUsage(false);
-
-
             }
+            this.playerVibeCheck();
             roundCounter++;
+            currentPlayer++;
 
         }
 
@@ -138,7 +144,7 @@ public class DuckHunt {
     private int getNumberOfPlayers(){
         int count = 0;
         for(var player : players){
-            if(player.isActive()){
+            if(player.name() != null){
                 count++;
             }
         }
@@ -147,16 +153,14 @@ public class DuckHunt {
 
     private void playerVibeCheck(){
         for(Player player : players){
-            if(player == null || (!player.wasRemoved() && player.isActive()) ) continue;
-            System.out.println("Player " + players[currentPlayer].name() + " has lost the game of Duck Hunt, poor little ducks...");
+            if(player.name() == null || (!player.wasRemoved() && player.isActive()) ) continue;
+            System.out.println("Player " + player.name() + " has lost the game of Duck Hunt, poor little ducks...");
 
             for(byte i = 0; i < 3; i++) {
-                activeDeck.addCard(players[currentPlayer].getHand().get(i));
-                players[currentPlayer].getHand().clear();
+                activeDeck.addCard(player.getHand().get(i));
             }
 
             player.removePlayer();
-            players[currentPlayer] = null;
         }
     }
 
@@ -223,10 +227,12 @@ public class DuckHunt {
 
         if(!Objects.equals(killedDuck,"")){
             for (Player  player : players){
-                if(Objects.equals(player.getPlayerColor(), killedDuck)){
-                    player.takeDamage();
-                    System.out.println(player.name() + "'s duck has been shot");
-                    break;
+                if(player.name() != null){
+                    if(Objects.equals(player.getPlayerColor(), killedDuck)) {
+                        player.takeDamage();
+                        System.out.println(player.name() + "'s duck has been shot");
+                        break;
+                    }
                 }
             }
         }
@@ -235,7 +241,9 @@ public class DuckHunt {
         players[currentPlayer].getHand().set(inputPosition,activeDeck.getCard());
         activeDeck.addCard(usedCard);
 
-        return true;
+        hasBeenUsed = true;
+
+        return hasBeenUsed;
     }
 
     private void showPlayerCards(int currentPlayer){

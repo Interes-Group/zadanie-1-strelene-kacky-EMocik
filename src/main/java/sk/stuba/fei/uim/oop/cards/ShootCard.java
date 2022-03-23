@@ -17,7 +17,7 @@ public class ShootCard extends Cards{
     @Override
     public String use() {
 
-        int position = KeyboardInput.readInt("Select an aimed position to shoot at");
+        int position;
 
         while(true) {
             position = KeyboardInput.readInt("Select an aimed position to shoot at");  //
@@ -33,9 +33,16 @@ public class ShootCard extends Cards{
             }
 
         }
-        String killedDuck = copyOfPond.changePond().get(position);
-        copyOfPond.changePond().remove(position);
+
+
         copyOfPond.changeAim().set(position, false);
+        String killedDuck = copyOfPond.changePond().get(position);
+
+        if(Objects.equals(killedDuck, "Water")){
+            return "";
+        }
+
+        copyOfPond.changePond().remove(position);
         copyOfPond.changePond().add(copyOfPond.changeRemainingPond().get(0));
         copyOfPond.changeRemainingPond().remove(0);
 
