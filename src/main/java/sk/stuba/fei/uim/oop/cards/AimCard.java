@@ -13,15 +13,21 @@ public class AimCard extends Cards{
         this.copyOfPond = copyOfPond;
     }
 
+
     @Override
     public String use() {
 
-        int position = KeyboardInput.readInt("Select a position to aim at");
-        while(position > 6 || position <= 0) {
-            position = KeyboardInput.readInt("You can only select a valid <0-5> or a not aimed at position");
-
-            if (!copyOfPond.changeAim().get(position)) {
-                break;
+        int position;
+        while(true) {
+            position = KeyboardInput.readInt("Select a position to aim at");
+            if(position >=0 && position <= 6){
+                if (!copyOfPond.changeAim().get(position)) {
+                    break;
+                }
+                System.out.println("Selected position is already aimed at, try another one.");
+            }
+            else{
+                System.out.println("You can only select a valid <0-5> or a not aimed at position.");
             }
         }
         copyOfPond.changeAim().set(position, true);

@@ -22,7 +22,8 @@ public class TurboduckCard extends Cards {
     @Override
     public String use() {
         int position = KeyboardInput.readInt("Select a duck to be moved to first position");
-        while(Objects.equals(copyOfPond.changePond().get(position), "Water")){
+        while(!(!Objects.equals(copyOfPond.changePond().get(position), "Water")
+                && (position <=6 && position >=0))){
             position = KeyboardInput.readInt("You can only select a Duck to be moved to first position, try again");
         }
 

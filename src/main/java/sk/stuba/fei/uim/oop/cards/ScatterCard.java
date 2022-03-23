@@ -17,6 +17,7 @@ public class ScatterCard extends Cards{
     }
     @Override
     public String use() {
+        //TODO: repair scatter
         Collections.shuffle(copyOfPond.changePond());
 
         return "";

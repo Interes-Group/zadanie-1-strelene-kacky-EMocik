@@ -13,7 +13,8 @@ import java.util.Objects;
 public class DuckHunt {
     private Player[] players;
     private int roundCounter;
-    private int currentPlayer;
+    private int numOfPlayers;
+    private int currentPlayer = 0;
     private final ArrayList<String> names = new ArrayList<>();
     private final ArrayList<String> cards = new ArrayList<>();
     private final Color colors = new Color();
@@ -124,6 +125,13 @@ public class DuckHunt {
             }
             roundCounter++;
 
+        }
+
+        for (Player player : players) {
+            if(player.name() != null){
+                System.out.println("Winner winner chicken(duck) dinner! Congrats " + player.name() +
+                        " you have won the game of Duck Hunt!");
+            }
         }
     }
 

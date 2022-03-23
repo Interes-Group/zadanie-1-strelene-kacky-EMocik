@@ -22,7 +22,7 @@ public class KillBillCard extends Cards{
         String killedDuck = "";
         
         int position = KeyboardInput.readInt("Select a position for Wild Bill to shoot");
-        while(position > 6 || position <= 0) {
+        while(position > 6 || position < 0) {
             position = KeyboardInput.readInt("You can only select a valid <0-5> position");
 
         }

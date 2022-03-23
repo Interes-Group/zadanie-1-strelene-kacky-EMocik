@@ -2,6 +2,8 @@ package sk.stuba.fei.uim.oop.cards;
 
 import sk.stuba.fei.uim.oop.position.Pond;
 import sk.stuba.fei.uim.oop.utility.KeyboardInput;
+
+import java.util.Objects;
 //Shoot - 12 cards
 
 public class ShootCard extends Cards{
@@ -17,14 +19,19 @@ public class ShootCard extends Cards{
 
         int position = KeyboardInput.readInt("Select an aimed position to shoot at");
 
-        while(position > 6 || position <= 0) {
-            position = KeyboardInput.readInt("You can only select a valid <0-5> or an aimed at position");
-            //if pos isnt water, remove pos
-            if (copyOfPond.changeAim().get(position)) {
-                break;
-            }
-            else
+        while(true) {
+            position = KeyboardInput.readInt("Select an aimed position to shoot at");  //
+            if(position <=5 && position >= 0) {
+                if (copyOfPond.changeAim().get(position)) {
+                    break;
+                }
                 System.out.println("The place you want to shoot at is not aimed at");
+
+            }
+            else{
+                System.out.println("You can only select a valid <0-5> or an aimed at position");
+            }
+
         }
         String killedDuck = copyOfPond.changePond().get(position);
         copyOfPond.changePond().remove(position);
