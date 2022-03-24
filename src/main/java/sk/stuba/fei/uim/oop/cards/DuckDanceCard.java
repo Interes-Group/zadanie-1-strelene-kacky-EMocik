@@ -6,7 +6,6 @@ place 6 new cards into the pond.
  */
 
 import sk.stuba.fei.uim.oop.position.Pond;
-
 import java.util.Collections;
 
 public class DuckDanceCard extends Cards{

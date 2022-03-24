@@ -1,7 +1,7 @@
 package sk.stuba.fei.uim.oop.cards;
 
 import sk.stuba.fei.uim.oop.position.Pond;
-import sk.stuba.fei.uim.oop.utility.KeyboardInput;
+import sk.stuba.fei.uim.oop.utility.ZKlavesnice;
 
 import java.util.Objects;
 //Shoot - 12 cards
@@ -20,16 +20,16 @@ public class ShootCard extends Cards{
         int position;
 
         while(true) {
-            position = KeyboardInput.readInt("Select an aimed position to shoot at");  //
+            position = ZKlavesnice.readInt("Select an aimed position to shoot at: ");  //
             if(position <=5 && position >= 0) {
                 if (copyOfPond.changeAim().get(position)) {
                     break;
                 }
-                System.out.println("The place you want to shoot at is not aimed at");
+                System.out.println("The place you want to shoot at is not aimed at.");
 
             }
             else{
-                System.out.println("You can only select a valid <0-5> or an aimed at position");
+                System.out.println("You can only select a valid <0-5> or an aimed at position.");
             }
 
         }

@@ -6,8 +6,7 @@ The ducks that were overtaken by it move one space backwards, to fill the gap.
  */
 
 import sk.stuba.fei.uim.oop.position.Pond;
-import sk.stuba.fei.uim.oop.utility.KeyboardInput;
-
+import sk.stuba.fei.uim.oop.utility.ZKlavesnice;
 import java.util.Collections;
 import java.util.Objects;
 
@@ -21,10 +20,10 @@ public class TurboduckCard extends Cards {
 
     @Override
     public String use() {
-        int position = KeyboardInput.readInt("Select a duck to be moved to first position");
+        int position = ZKlavesnice.readInt("Select a duck to be moved to first position: ");
         while(!(!Objects.equals(copyOfPond.changePond().get(position), "Water")
-                && (position <=6 && position >=0))){
-            position = KeyboardInput.readInt("You can only select a Duck to be moved to first position, try again");
+                && (position <= 5 && position >= 0))){
+            position = ZKlavesnice.readInt("You can only select a Duck to be moved to first position, try again: ");
         }
 
         Collections.swap(copyOfPond.changePond(), position, 0);

@@ -6,7 +6,6 @@ import sk.stuba.fei.uim.oop.player.Player;
 import sk.stuba.fei.uim.oop.position.ActiveDeck;
 import sk.stuba.fei.uim.oop.position.Pond;
 import sk.stuba.fei.uim.oop.utility.ZKlavesnice;
-
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -36,9 +35,9 @@ public class CardUsage {
                     return true;
 
 
-        int inputPosition = ZKlavesnice.readInt("Choose an action card <0;2>");
+        int inputPosition = ZKlavesnice.readInt("Choose an action card <0;2>: ");
         while (inputPosition > 2 || inputPosition < 0){
-            inputPosition = ZKlavesnice.readInt("You can only choose between 0 and 2, try again");
+            inputPosition = ZKlavesnice.readInt("You can only choose between 0 and 2, try again: ");
         }
 
         Cards usedCard = players[currentPlayer].getHand().get(inputPosition);
@@ -46,7 +45,7 @@ public class CardUsage {
         if((tf.get(0) && Objects.equals("Shoot",usedCard.toString())) ||
                 (tf.get(1) && Objects.equals("Aim", usedCard.toString()))){
 
-            System.out.println("You cannot use " + usedCard + " at the moment, please choose another card");
+            System.out.println("You cannot use " + usedCard + " at the moment, please choose another card.");
 
             if(useCards(currentPlayer))
                 return true;

@@ -3,11 +3,10 @@ package sk.stuba.fei.uim.oop.cards;
 //Aim - 10 cards
 
 import sk.stuba.fei.uim.oop.position.Pond;
-import sk.stuba.fei.uim.oop.utility.KeyboardInput;
+import sk.stuba.fei.uim.oop.utility.ZKlavesnice;
 
 public class AimCard extends Cards{
     Pond copyOfPond;
-
 
     public AimCard(Pond copyOfPond){
         this.copyOfPond = copyOfPond;
@@ -19,8 +18,8 @@ public class AimCard extends Cards{
 
         int position;
         while(true) {
-            position = KeyboardInput.readInt("Select a position to aim at");
-            if(position >=0 && position <= 6){
+            position = ZKlavesnice.readInt("Select a position to aim at: ");
+            if(position >=0 && position <= 5){
                 if (!copyOfPond.changeAim().get(position)) {
                     break;
                 }

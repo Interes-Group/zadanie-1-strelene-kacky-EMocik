@@ -24,7 +24,7 @@ public class ZKlavesnice {
         String s = "";
 
         BufferedReader zklavesnice = new BufferedReader(new InputStreamReader(System.in));
-        try {	System.out.println(napis_pre_uzivatela);
+        try {	System.out.print(napis_pre_uzivatela);
             s = zklavesnice.readLine();
             //System.out.println("Nacital som " + s);
         } catch (Exception e) {
@@ -40,12 +40,12 @@ public class ZKlavesnice {
         String s;
 
         BufferedReader zklavesnice = new BufferedReader(new InputStreamReader(System.in));
-        try {	System.out.println(napis_pre_uzivatela);
+        try {	System.out.print(napis_pre_uzivatela);
             s = zklavesnice.readLine();
             //System.out.println("Nacital som " + s);
             n = Integer.parseInt(s);
         } catch (Exception e) {
-            System.out.println("nepodarilo sa");
+            System.out.println("You entered an invalid input, try again.");
             n = readInt(napis_pre_uzivatela);
         }
 
