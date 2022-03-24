@@ -11,12 +11,27 @@ import java.util.ArrayList;
 public class DuckHunt {
 
     public DuckHunt(){
+        Player[] players;
+        ArrayList<String> names;
+        Pond pond;
+        ActiveDeck activeDeck;
+        int numOfPlayers;
 
-        this.initGamePlayers();
-        this.initBoard();
-        this.initCards();
-        this.initPlayer();
-        this.startGame();
+
+        InitGamePlayers initGamePlayers = new InitGamePlayers();
+        players = initGamePlayers.getPlayers();
+        names = initGamePlayers.getNames();
+
+        InitBoard initBoard = new InitBoard(players.length);
+        pond = initBoard.getPond();
+
+        InitCards initCards = new InitCards(pond);
+        activeDeck = initCards.getActiveDeck();
+
+        InitPlayer initPlayer = new InitPlayer(players, names, activeDeck, new Color());
+        numOfPlayers = initPlayer.getNumOfPlayers();
+
+        StartGame startGame = new StartGame(players, numOfPlayers, activeDeck, pond);
 
     }
 
